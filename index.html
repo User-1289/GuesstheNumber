@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name='viewport' content='width=device-width, initial-scale=1'/>
+<title>Guess the number</title>
+<style>
+h1{
+background-color:skyblue;
+text-align:center;
+}
+h3{
+text-align:center;
+}
+input{
+width:300px;
+height:60px;
+border: 3px solid black;
+position:relative;
+left: 40px;
+top:5px;
+font-size:50px;
+text-align:center;
+}
+#container{
+background-color:lightgreen;
+margin: auto;
+ width: 100%;
+ border: 3px solid black;
+ height:330px;
+}
+h2{
+text-align:center;
+font-size:20px;
+}
+#submitt{
+background-color:yellow;
+position:relative;
+top:130px;
+right:-150px;
+width:100px;
+height:30px;
+border-radius:10px;
+}
+#match-state{
+background-color:orange;
+font-size:20px;
+position:relative;
+top:80px;
+text-align:center;
+}
+#prevG{
+position:relative;
+top:50px;
+font-size:20px;
+right:-140px;
+}
+#guess-remained{
+position:relative;
+top:50px;
+left:115px;
+font-size:20px;
+}
+#reset{
+position:relative;
+top:50px;
+left:190px;
+}
+#button{
+position:relative;
+top:80px;
+left:170px;
+}
+</style>
+</head>
+<body>
+<h1>Number guessing game</h1>
+<h3>Try and guess a number out of 10</h3>
+<h3 id="guess-made"></h3>
+<div id="container">
+<h2>Guess the number</h2>
+<input id="text" type="text">
+<button id="submitt">Submit Guess</button>
+<div id="prevG"></div>
+<div id="guess-remained"></div>
+<div id="match-state"></div>
+<div id="reset"></div>
+<button style="display:none;"id="button" onclick="location.reload(true)">Try again</button>
+</div>
+
+<script>
+let submitBtn = document.getElementById('submitt')
+let chances = 5;
+let guesses = 0
+submitBtn.addEventListener('click', function(){
+let vText = document.getElementById('text')
+let result = document.getElementById('match-state')
+let GuessMade = document.getElementById('guess-made')
+let prevG = document.getElementById('prevG') 
+let guessRemained = document.getElementById('guess-remained')
+let resetBtn = document.getElementById('reset')
+
+guessRemained.innerHTML = "Guesses remained : " + chances
+prevG.innerHTML = "Previous guesses: " + vText.value 
+
+if (chances == 0){
+result.innerHTML = "Too low. Try again"
+document.getElementById('button').style.display = "inline"
+//resetBtn.innerHTML = `<button onclick="location.reload(true)">Try again</button>`
+return;
+}
+
+let gNum = Math.ceil(Math.random() * 10)
+console.log(gNum)
+GuessMade.innerHTML = "The previous number made by the computer was: " + gNum
+
+if (vText.value==gNum){
+result.innerHTML = "You are lucky. It is matched"
+chances = 5
+document.getElementById('button').style.display = "inline"
+}
+else if (vText.value!=gNum){
+chances--
+}
+vText.value = ''
+})
+</script>
+</body>
+</html>
